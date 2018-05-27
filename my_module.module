@@ -1,0 +1,21 @@
+<?php
+/**
+ * hook_page_attachments to load inline JS.
+ */
+function my_module_page_attachments(array &$attachments) {
+ 
+    $domain = 'https://myexternaldomain.com/';
+    $api_key = $gdpr_config->get('my_variable_name');
+    
+    $cdn_url = $domain . $api_key . '.js';
+    $attachments['#attached']['html_head'][] = [
+      [
+        '#type' => 'html_tag',
+        '#tag' => 'script',
+        '#value' => '',
+        '#attributes' => ['src' => $cdn_url],
+      ],
+      'som_external_cdn',
+    ];
+  }
+}
